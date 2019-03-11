@@ -56,6 +56,7 @@ public class BedClient implements ServiceObserver {
     }
 
     public void serviceAdded(ServiceDescription service) {
+        System.out.println("service added");
         current = service;
         channel = ManagedChannelBuilder.forAddress(service.getAddress(), service.getPort())
                 .usePlaintext(true)
