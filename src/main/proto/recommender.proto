@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package recommender;
+
+option java_multiple_files = true;
+option java_package = "org.dominic.example.recommender";
+option java_outer_classname = "RecommenderProto";
+
+// The greeting service definition.
+service MovieRecommender {
+    rpc RecommendMovie(Profile) returns (Recommendations) {}
+}
+
+message Recommendations {
+  repeated Movie movies = 1;
+}
+
+message Movie {
+    string title = 1;
+    string genre = 2;
+    string director = 3;
+}
+
+message Profile {
+    int32 age = 1;
+    string name = 2;
+    repeated Movie seen = 3;
+}
