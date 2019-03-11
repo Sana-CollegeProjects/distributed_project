@@ -1,7 +1,7 @@
 package client;
 
 import javax.swing.JPanel;
-import clientui.NewJFrame;
+import clientui.BedClientGUI;
 import com.google.protobuf.Empty;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -16,7 +16,7 @@ import org.dominic.example.bed.BedStatus;
 
 public class BedClient implements ServiceObserver {
 
-    protected NewJFrame ui;
+    protected BedClientGUI ui;
     protected ServiceDescription current;
     private final String serviceType;
     private final String name;
@@ -31,11 +31,11 @@ public class BedClient implements ServiceObserver {
     public BedClient() {
         serviceType = "_bed._udp.local.";
         name = "Bedroom";
-        ClientManager clientManager = ClientManager.getInstance();
+        jmDNSServiceTracker clientManager = jmDNSServiceTracker.getInstance();
         clientManager.register(this);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ui = new NewJFrame(BedClient.this);
+                ui = new BedClientGUI(BedClient.this);
                 ui.setVisible(true);
             }
         });
@@ -95,7 +95,6 @@ public class BedClient implements ServiceObserver {
             Empty request = Empty.newBuilder().build();
             BedStatus status = blockingStub.getStatus(request);
             System.out.println("Hello" + status);
-            
 
         } catch (RuntimeException e) {
             logger.log(Level.WARNING, "RPC failed", e);

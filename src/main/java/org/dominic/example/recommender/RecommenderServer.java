@@ -82,7 +82,7 @@ public class RecommenderServer {
             for (Movie movie : movies) {
                 boolean seen = false;
                 for (Movie option : seenMovies) {
-                    if (movie.getTitle().equals(option.getTitle())){
+                    if (movie.getTitle().equals(option.getTitle())) {
                         seen = true;
                     }
                 }
@@ -90,7 +90,7 @@ public class RecommenderServer {
                     recommendations.add(movie);
                 }
             }
-            
+
             responseObserver.onNext(Recommendations.newBuilder().addAllMovies(recommendations).build());
             responseObserver.onCompleted();
 

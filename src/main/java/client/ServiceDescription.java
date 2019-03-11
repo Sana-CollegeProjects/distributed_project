@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @author dominic
  */
 public final class ServiceDescription {
-    
+
     private final String address;
     private final int port;
     private final HashMap<String, String> properties;
@@ -24,10 +24,10 @@ public final class ServiceDescription {
         properties = new HashMap<String, String>();
     }
 
-    public void addProperty(String key, String value){
+    public void addProperty(String key, String value) {
         properties.put(key, value);
     }
-    
+
     public String getAddress() {
         return address;
     }
@@ -39,7 +39,5 @@ public final class ServiceDescription {
     public HashMap<String, String> getProperties() {
         return properties;
     }
-    
-    
-    
+
 }

@@ -13,15 +13,15 @@ import javax.swing.JPanel;
  * @author dominic
  */
 public interface ServiceObserver {
-    
+
     public boolean interested(String type);
-    
+
     public List<String> serviceInterests();
-    
+
     public void serviceAdded(ServiceDescription service);
-    
+
     public String getName();
-            
+
     public void switchService(String name);
-    
+
 }

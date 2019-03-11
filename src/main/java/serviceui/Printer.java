@@ -10,8 +10,9 @@ package serviceui;
  * @author dominic
  */
 public interface Printer {
-    
+
     public void append(String string);
+
     public void clear();
-    
+
 }

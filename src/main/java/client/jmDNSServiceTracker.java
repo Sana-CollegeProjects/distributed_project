@@ -1,24 +1,20 @@
 package client;
 
 import java.io.IOException;
-
-import javax.jmdns.JmDNS;
-import javax.jmdns.ServiceEvent;
-import javax.jmdns.ServiceInfo;
-import javax.jmdns.ServiceListener;
-
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceEvent;
+import javax.jmdns.ServiceListener;
 
-public class ClientManager implements ServiceListener {
+public class jmDNSServiceTracker implements ServiceListener {
 
     private JmDNS jmdns;
-    private static ClientManager instance;
+    private static jmDNSServiceTracker instance;
     ServiceObserver observer;
-    
-    private ClientManager() {
+
+    private jmDNSServiceTracker() {
         try {
             jmdns = JmDNS.create(InetAddress.getLocalHost());
 
@@ -26,17 +22,17 @@ public class ClientManager implements ServiceListener {
             e.printStackTrace();
         }
     }
-    
-    public static ClientManager getInstance(){
-        if (instance == null){
-            instance = new ClientManager();
+
+    public static jmDNSServiceTracker getInstance() {
+        if (instance == null) {
+            instance = new jmDNSServiceTracker();
         }
         return instance;
     }
-    
-    public void register(ServiceObserver observer){
+
+    public void register(ServiceObserver observer) {
         this.observer = observer;
-                    jmdns.addServiceListener(observer.serviceInterests().get(0), this);
+        jmdns.addServiceListener(observer.serviceInterests().get(0), this);
 
     }
 
@@ -44,7 +40,7 @@ public class ClientManager implements ServiceListener {
         try {
             jmdns.close();
         } catch (IOException ex) {
-            Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jmDNSServiceTracker.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,6 +79,6 @@ public class ClientManager implements ServiceListener {
 
         if (observer != null && observer.interested(type)) {
             observer.serviceAdded(new ServiceDescription(address, port));
-        } 
+        }
     }
 }
