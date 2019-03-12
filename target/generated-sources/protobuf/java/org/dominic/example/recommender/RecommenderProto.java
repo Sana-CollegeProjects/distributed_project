@@ -38,16 +38,18 @@ public final class RecommenderProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021recommender.proto\022\013recommender\"5\n\017Reco" +
-      "mmendations\022\"\n\006movies\030\001 \003(\0132\022.recommende" +
-      "r.Movie\"7\n\005Movie\022\r\n\005title\030\001 \001(\t\022\r\n\005genre" +
-      "\030\002 \001(\t\022\020\n\010director\030\003 \001(\t\"F\n\007Profile\022\013\n\003a" +
-      "ge\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022 \n\004seen\030\003 \003(\0132\022.r" +
-      "ecommender.Movie2Z\n\020MovieRecommender\022F\n\016" +
-      "RecommendMovie\022\024.recommender.Profile\032\034.r" +
-      "ecommender.Recommendations\"\000B5\n\037org.domi" +
-      "nic.example.recommenderB\020RecommenderProt" +
-      "oP\001b\006proto3"
+      "\n\021recommender.proto\022\013recommender\032\033google" +
+      "/protobuf/empty.proto\"5\n\017Recommendations" +
+      "\022\"\n\006movies\030\001 \003(\0132\022.recommender.Movie\"7\n\005" +
+      "Movie\022\r\n\005title\030\001 \001(\t\022\r\n\005genre\030\002 \001(\t\022\020\n\010d" +
+      "irector\030\003 \001(\t\"F\n\007Profile\022\013\n\003age\030\001 \001(\005\022\014\n" +
+      "\004name\030\002 \001(\t\022 \n\004seen\030\003 \003(\0132\022.recommender." +
+      "Movie2\242\001\n\020MovieRecommender\022F\n\016RecommendM" +
+      "ovie\022\024.recommender.Profile\032\034.recommender" +
+      ".Recommendations\"\000\022F\n\014getAllMovies\022\026.goo" +
+      "gle.protobuf.Empty\032\034.recommender.Recomme" +
+      "ndations\"\000B5\n\037org.dominic.example.recomm" +
+      "enderB\020RecommenderProtoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -60,6 +62,7 @@ public final class RecommenderProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.EmptyProto.getDescriptor(),
         }, assigner);
     internal_static_recommender_Recommendations_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -79,6 +82,7 @@ public final class RecommenderProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_recommender_Profile_descriptor,
         new java.lang.String[] { "Age", "Name", "Seen", });
+    com.google.protobuf.EmptyProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

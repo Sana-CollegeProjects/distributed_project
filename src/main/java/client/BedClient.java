@@ -95,7 +95,7 @@ public class BedClient implements ServiceObserver {
 
             Empty request = Empty.newBuilder().build();
             BedStatus status = blockingStub.getStatus(request);
-            System.out.println("Hello" + status);
+            System.out.println("Hello " + status);
 
         } catch (RuntimeException e) {
             logger.log(Level.WARNING, "RPC failed", e);

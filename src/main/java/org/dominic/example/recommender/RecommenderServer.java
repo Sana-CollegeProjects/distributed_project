@@ -1,5 +1,6 @@
 package org.dominic.example.recommender;
 
+import com.google.protobuf.Empty;
 import org.jpdna.grpchello.*;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -9,13 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.logging.Logger;
+import services.JmDNSRegistrationHelper;
 
 public class RecommenderServer {
 
     private static final Logger logger = Logger.getLogger(RecommenderServer.class.getName());
 
     /* The port on which the server should run */
-    private int port = 50051;
+    private int port = 50054;
     private Server server;
 
     private void start() throws Exception {
@@ -24,6 +26,8 @@ public class RecommenderServer {
                 .build()
                 .start();
         logger.info("Server started, listening on " + port);
+        JmDNSRegistrationHelper helper = new JmDNSRegistrationHelper("Dominics", "_movie-recommender._udp.local.", "", port);
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
@@ -94,6 +98,15 @@ public class RecommenderServer {
             responseObserver.onNext(Recommendations.newBuilder().addAllMovies(recommendations).build());
             responseObserver.onCompleted();
 
+        }
+
+        @Override
+        public void getAllMovies(Empty request,
+                StreamObserver<Recommendations> responseObserver) {
+            Recommendations all = Recommendations.newBuilder().addAllMovies(movies).build();
+            responseObserver.onNext(all);
+            responseObserver.onCompleted();
+            
         }
     }
 }

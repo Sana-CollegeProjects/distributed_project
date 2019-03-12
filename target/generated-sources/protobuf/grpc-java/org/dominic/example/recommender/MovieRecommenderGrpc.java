@@ -62,6 +62,38 @@ public final class MovieRecommenderGrpc {
      return getRecommendMovieMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      org.dominic.example.recommender.Recommendations> getGetAllMoviesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getAllMovies",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = org.dominic.example.recommender.Recommendations.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      org.dominic.example.recommender.Recommendations> getGetAllMoviesMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, org.dominic.example.recommender.Recommendations> getGetAllMoviesMethod;
+    if ((getGetAllMoviesMethod = MovieRecommenderGrpc.getGetAllMoviesMethod) == null) {
+      synchronized (MovieRecommenderGrpc.class) {
+        if ((getGetAllMoviesMethod = MovieRecommenderGrpc.getGetAllMoviesMethod) == null) {
+          MovieRecommenderGrpc.getGetAllMoviesMethod = getGetAllMoviesMethod = 
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, org.dominic.example.recommender.Recommendations>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "recommender.MovieRecommender", "getAllMovies"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.dominic.example.recommender.Recommendations.getDefaultInstance()))
+                  .setSchemaDescriptor(new MovieRecommenderMethodDescriptorSupplier("getAllMovies"))
+                  .build();
+          }
+        }
+     }
+     return getGetAllMoviesMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -99,6 +131,13 @@ public final class MovieRecommenderGrpc {
       asyncUnimplementedUnaryCall(getRecommendMovieMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void getAllMovies(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<org.dominic.example.recommender.Recommendations> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetAllMoviesMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -108,6 +147,13 @@ public final class MovieRecommenderGrpc {
                 org.dominic.example.recommender.Profile,
                 org.dominic.example.recommender.Recommendations>(
                   this, METHODID_RECOMMEND_MOVIE)))
+          .addMethod(
+            getGetAllMoviesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.protobuf.Empty,
+                org.dominic.example.recommender.Recommendations>(
+                  this, METHODID_GET_ALL_MOVIES)))
           .build();
     }
   }
@@ -140,6 +186,14 @@ public final class MovieRecommenderGrpc {
       asyncUnaryCall(
           getChannel().newCall(getRecommendMovieMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getAllMovies(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<org.dominic.example.recommender.Recommendations> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetAllMoviesMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -168,6 +222,13 @@ public final class MovieRecommenderGrpc {
     public org.dominic.example.recommender.Recommendations recommendMovie(org.dominic.example.recommender.Profile request) {
       return blockingUnaryCall(
           getChannel(), getRecommendMovieMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.dominic.example.recommender.Recommendations getAllMovies(com.google.protobuf.Empty request) {
+      return blockingUnaryCall(
+          getChannel(), getGetAllMoviesMethod(), getCallOptions(), request);
     }
   }
 
@@ -199,9 +260,18 @@ public final class MovieRecommenderGrpc {
       return futureUnaryCall(
           getChannel().newCall(getRecommendMovieMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.dominic.example.recommender.Recommendations> getAllMovies(
+        com.google.protobuf.Empty request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetAllMoviesMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_RECOMMEND_MOVIE = 0;
+  private static final int METHODID_GET_ALL_MOVIES = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -222,6 +292,10 @@ public final class MovieRecommenderGrpc {
       switch (methodId) {
         case METHODID_RECOMMEND_MOVIE:
           serviceImpl.recommendMovie((org.dominic.example.recommender.Profile) request,
+              (io.grpc.stub.StreamObserver<org.dominic.example.recommender.Recommendations>) responseObserver);
+          break;
+        case METHODID_GET_ALL_MOVIES:
+          serviceImpl.getAllMovies((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<org.dominic.example.recommender.Recommendations>) responseObserver);
           break;
         default:
@@ -286,6 +360,7 @@ public final class MovieRecommenderGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new MovieRecommenderFileDescriptorSupplier())
               .addMethod(getRecommendMovieMethod())
+              .addMethod(getGetAllMoviesMethod())
               .build();
         }
       }

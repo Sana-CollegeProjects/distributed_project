@@ -27,7 +27,7 @@ public class BedServer {
 
     private void start() throws Exception {
         server = ServerBuilder.forPort(port)
-                .addService(new GreeterImpl())
+                .addService(new BedImpl())
                 .build()
                 .start();
         JmDNSRegistrationHelper helper = new JmDNSRegistrationHelper("Dominics", "_bed._udp.local.", "", port);
@@ -68,12 +68,12 @@ public class BedServer {
         server.blockUntilShutdown();
     }
 
-    private class GreeterImpl extends BedGrpc.BedImplBase {
+    private class BedImpl extends BedGrpc.BedImplBase {
 
         private int percentHot = 0;
         private Printer ui;
 
-        public GreeterImpl() {
+        public BedImpl() {
             String name = "Dominic's";
             String serviceType = "_bed._udp.local.";
             ui = new ServiceUI(name + serviceType);
@@ -87,6 +87,7 @@ public class BedServer {
 
         }
 
+        @Override
         public void getStatus(com.google.protobuf.Empty request,
                 io.grpc.stub.StreamObserver<org.dominic.example.bed.BedStatus> responseObserver) {
             responseObserver.onNext(BedStatus.newBuilder().setPercentageHeated(percentHot).build());
