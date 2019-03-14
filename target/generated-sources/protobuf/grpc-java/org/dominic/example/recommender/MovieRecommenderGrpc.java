@@ -94,6 +94,38 @@ public final class MovieRecommenderGrpc {
      return getGetAllMoviesMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      org.dominic.example.recommender.Movie> getStreamNewMoviesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "streamNewMovies",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = org.dominic.example.recommender.Movie.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      org.dominic.example.recommender.Movie> getStreamNewMoviesMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, org.dominic.example.recommender.Movie> getStreamNewMoviesMethod;
+    if ((getStreamNewMoviesMethod = MovieRecommenderGrpc.getStreamNewMoviesMethod) == null) {
+      synchronized (MovieRecommenderGrpc.class) {
+        if ((getStreamNewMoviesMethod = MovieRecommenderGrpc.getStreamNewMoviesMethod) == null) {
+          MovieRecommenderGrpc.getStreamNewMoviesMethod = getStreamNewMoviesMethod = 
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, org.dominic.example.recommender.Movie>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "recommender.MovieRecommender", "streamNewMovies"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.dominic.example.recommender.Movie.getDefaultInstance()))
+                  .setSchemaDescriptor(new MovieRecommenderMethodDescriptorSupplier("streamNewMovies"))
+                  .build();
+          }
+        }
+     }
+     return getStreamNewMoviesMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -138,6 +170,13 @@ public final class MovieRecommenderGrpc {
       asyncUnimplementedUnaryCall(getGetAllMoviesMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void streamNewMovies(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<org.dominic.example.recommender.Movie> responseObserver) {
+      asyncUnimplementedUnaryCall(getStreamNewMoviesMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -154,6 +193,13 @@ public final class MovieRecommenderGrpc {
                 com.google.protobuf.Empty,
                 org.dominic.example.recommender.Recommendations>(
                   this, METHODID_GET_ALL_MOVIES)))
+          .addMethod(
+            getStreamNewMoviesMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.google.protobuf.Empty,
+                org.dominic.example.recommender.Movie>(
+                  this, METHODID_STREAM_NEW_MOVIES)))
           .build();
     }
   }
@@ -194,6 +240,14 @@ public final class MovieRecommenderGrpc {
       asyncUnaryCall(
           getChannel().newCall(getGetAllMoviesMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void streamNewMovies(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<org.dominic.example.recommender.Movie> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getStreamNewMoviesMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -229,6 +283,14 @@ public final class MovieRecommenderGrpc {
     public org.dominic.example.recommender.Recommendations getAllMovies(com.google.protobuf.Empty request) {
       return blockingUnaryCall(
           getChannel(), getGetAllMoviesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<org.dominic.example.recommender.Movie> streamNewMovies(
+        com.google.protobuf.Empty request) {
+      return blockingServerStreamingCall(
+          getChannel(), getStreamNewMoviesMethod(), getCallOptions(), request);
     }
   }
 
@@ -272,6 +334,7 @@ public final class MovieRecommenderGrpc {
 
   private static final int METHODID_RECOMMEND_MOVIE = 0;
   private static final int METHODID_GET_ALL_MOVIES = 1;
+  private static final int METHODID_STREAM_NEW_MOVIES = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -297,6 +360,10 @@ public final class MovieRecommenderGrpc {
         case METHODID_GET_ALL_MOVIES:
           serviceImpl.getAllMovies((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<org.dominic.example.recommender.Recommendations>) responseObserver);
+          break;
+        case METHODID_STREAM_NEW_MOVIES:
+          serviceImpl.streamNewMovies((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<org.dominic.example.recommender.Movie>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -361,6 +428,7 @@ public final class MovieRecommenderGrpc {
               .setSchemaDescriptor(new MovieRecommenderFileDescriptorSupplier())
               .addMethod(getRecommendMovieMethod())
               .addMethod(getGetAllMoviesMethod())
+              .addMethod(getStreamNewMoviesMethod())
               .build();
         }
       }

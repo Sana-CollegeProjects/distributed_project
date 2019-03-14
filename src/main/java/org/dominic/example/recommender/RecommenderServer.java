@@ -8,8 +8,11 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 import io.grpc.stub.StreamObserver;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import java.util.logging.Logger;
+import org.dominic.example.bed.BedStatus;
 import services.JmDNSRegistrationHelper;
 
 public class RecommenderServer {
@@ -17,7 +20,7 @@ public class RecommenderServer {
     private static final Logger logger = Logger.getLogger(RecommenderServer.class.getName());
 
     /* The port on which the server should run */
-    private int port = 50054;
+    private int port = 50051;
     private Server server;
 
     private void start() throws Exception {
@@ -107,6 +110,36 @@ public class RecommenderServer {
             responseObserver.onNext(all);
             responseObserver.onCompleted();
             
+        }
+        
+
+    public void streamNewMovies(Empty request,
+        StreamObserver<Movie> responseObserver) {
+                    Timer t = new Timer();
+            t.schedule(new StreamTask(responseObserver), 0, 2000);
+    }
+    
+
+
+
+        class StreamTask extends TimerTask {
+
+            StreamObserver<Movie> o;
+            int index = 0;
+
+            public StreamTask(StreamObserver<Movie> j) {
+                o = j;
+            }
+
+            @Override
+            public void run() {
+                if (index == movies.size() ) {
+                    o.onCompleted();
+                    this.cancel();
+                } else {
+                    o.onNext(movies.get(index++));
+                }
+            }
         }
     }
 }

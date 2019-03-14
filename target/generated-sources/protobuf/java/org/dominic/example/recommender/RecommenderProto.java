@@ -44,12 +44,14 @@ public final class RecommenderProto {
       "Movie\022\r\n\005title\030\001 \001(\t\022\r\n\005genre\030\002 \001(\t\022\020\n\010d" +
       "irector\030\003 \001(\t\"F\n\007Profile\022\013\n\003age\030\001 \001(\005\022\014\n" +
       "\004name\030\002 \001(\t\022 \n\004seen\030\003 \003(\0132\022.recommender." +
-      "Movie2\242\001\n\020MovieRecommender\022F\n\016RecommendM" +
+      "Movie2\345\001\n\020MovieRecommender\022F\n\016RecommendM" +
       "ovie\022\024.recommender.Profile\032\034.recommender" +
       ".Recommendations\"\000\022F\n\014getAllMovies\022\026.goo" +
       "gle.protobuf.Empty\032\034.recommender.Recomme" +
-      "ndations\"\000B5\n\037org.dominic.example.recomm" +
-      "enderB\020RecommenderProtoP\001b\006proto3"
+      "ndations\"\000\022A\n\017streamNewMovies\022\026.google.p" +
+      "rotobuf.Empty\032\022.recommender.Movie\"\0000\001B5\n" +
+      "\037org.dominic.example.recommenderB\020Recomm" +
+      "enderProtoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

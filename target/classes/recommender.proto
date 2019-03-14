@@ -12,6 +12,7 @@ option java_outer_classname = "RecommenderProto";
 service MovieRecommender {
     rpc RecommendMovie(Profile) returns (Recommendations) {}
     rpc getAllMovies(google.protobuf.Empty) returns (Recommendations) {}
+    rpc streamNewMovies(google.protobuf.Empty) returns (stream Movie) {}
 }
 
 message Recommendations {
