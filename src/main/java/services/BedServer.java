@@ -22,7 +22,7 @@ public class BedServer {
     private static final Logger logger = Logger.getLogger(BedServer.class.getName());
 
     /* The port on which the server should run */
-    private int port = 50051;
+    private int port = 50021;
     private Server server;
 
     private void start() throws Exception {
@@ -71,12 +71,10 @@ public class BedServer {
     private class BedImpl extends BedGrpc.BedImplBase {
 
         private int percentHot = 0;
-        private Printer ui;
 
         public BedImpl() {
             String name = "Dominic's";
             String serviceType = "_bed._udp.local.";
-            ui = new ServiceUI(name + serviceType);
         }
 
         @Override
@@ -107,7 +105,6 @@ public class BedServer {
                 if (percentHot < 100) {
                     percentHot += 10;
                     BedStatus status = BedStatus.newBuilder().setPercentageHeated(percentHot).build();
-                    ui.append(status.toString());
                     o.onNext(status);
                 } else {
                     o.onCompleted();
