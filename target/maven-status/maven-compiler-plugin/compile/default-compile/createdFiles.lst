@@ -15,7 +15,6 @@ io/grpc/examples/strings/RedactRequest$1.class
 org/jpdna/grpchello/GreeterGrpc$GreeterStub.class
 serviceui/ServiceUI.class
 org/dominic/example/recommender/Recommendations$1.class
-client/BedClient$2.class
 io/grpc/examples/strings/StringsServiceGrpc$StringsServiceFutureStub.class
 io/grpc/examples/strings/StringsServiceGrpc$StringsServiceStub.class
 org/dominic/example/recommender/MovieRecommenderGrpc$MovieRecommenderFutureStub.class

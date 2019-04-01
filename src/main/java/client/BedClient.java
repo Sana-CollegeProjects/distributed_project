@@ -1,7 +1,7 @@
 package client;
 
 import javax.swing.JPanel;
-import clientui.BedClientGUI;
+// import clientui.BedClientGUI;
 import com.google.protobuf.Empty;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -16,7 +16,7 @@ import org.dominic.example.bed.BedStatus;
 
 public class BedClient implements ServiceObserver {
 
-    protected BedClientGUI ui;
+    // protected BedClientGUI ui;
     protected ServiceDescription current;
     private final String serviceType;
     private final String name;
@@ -33,12 +33,13 @@ public class BedClient implements ServiceObserver {
         name = "Bedroom";
         jmDNSServiceTracker clientManager = jmDNSServiceTracker.getInstance();
         clientManager.register(this);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ui = new BedClientGUI(BedClient.this);
-                ui.setVisible(true);
-            }
-        });
+        // java.awt.EventQueue.invokeLater(new Runnable() {
+        //     public void run() {
+        //         ui = new BedClientGUI(BedClient.this);
+        //         ui.setVisible(true);
+        //     }
+        // });
+        serviceAdded(new ServiceDescription("34.241.178.93", 50021));
     }
 
     String getServiceType() {
@@ -62,6 +63,7 @@ public class BedClient implements ServiceObserver {
                 .usePlaintext(true)
                 .build();
         blockingStub = BedGrpc.newBlockingStub(channel);
+        warm();
     }
 
     public boolean interested(String type) {
@@ -88,7 +90,7 @@ public class BedClient implements ServiceObserver {
 
                     Iterator<BedStatus> response = blockingStub.warm(request);
                     while (response.hasNext()) {
-                        ui.append(response.next().toString());
+                        System.out.println(response.next().toString());
                     }
                 }
             }.start();
