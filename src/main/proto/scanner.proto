@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package scanner;
+
+option java_multiple_files = true;
+option java_package = "org.sana.example.scanner";
+option java_outer_classname = "ScannerProto";
+
+service Scan {
+    rpc ScanDocuments(Pages) returns (stream PagesScannedStatus) {}
+    rpc togglePower(CurrentStatus) returns (TransitioningToPowerStatus) {}
+}
+
+message Pages {
+    int32 numberOfPages = 1;
+}
+
+message PagesScannedStatus{
+    int32 pagesLeftInTray = 1;
+}
+
+message CurrentStatus{
+    string status = 1;
+}
+
+message TransitioningToPowerStatus{
+    string status = 1;
+}

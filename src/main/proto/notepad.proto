@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package notepad;
+
+option java_multiple_files = true;
+option java_package = "org.sana.example.notepad";
+option java_outer_classname = "NotepadProto";
+
+service Notepad {
+    rpc RecommendPriorities(google.protobuf.Empty) returns (Recommendations) {}
+}
+
+message Task {
+  string title = 1;
+  bool important = 2;
+  bool urgent = 3;
+}
+
+message Recommendations {
+  repeated Task tasks = 1;
+}

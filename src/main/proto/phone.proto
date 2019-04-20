@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package phone;
+
+option java_multiple_files = true;
+option java_package = "org.sana.example.phone";
+option java_outer_classname = "PhoneProto";
+
+service Phone {
+    rpc EmailContact(EmailInfo) returns (EmailStatus) {}
+    rpc CallContact(Name) returns (CallStatus) {}
+    rpc EndCall(google.protobuf.Empty) returns (CallStatus) {}
+    rpc getAllContacts(google.protobuf.Empty) returns (stream Person){}
+}
+
+message EmailInfo {
+  string name = 1;
+  string content = 2;
+}
+
+message EmailStatus {
+  bool sent = 1;
+  string address = 2;
+}
+
+message CallStatus {
+    string status = 1;
+}
+
+message Name {
+    string name = 1;
+}
+
+message Person{
+    string name = 1;
+    string email = 2;
+    string phone = 3;
+}
